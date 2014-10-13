@@ -1,0 +1,71 @@
+using System;
+using MySql.Data.MySqlClient;
+
+namespace PHolaMySql
+{
+	class MainClass
+	{
+		public static void Main (string[] args)
+		{
+
+		
+			MySqlConnection mySqlConnection = new MySqlConnection (
+				"Server = localhost;" +
+				"Database=dbprueba;" +
+				"User ID = root;" +
+				"Password=sistemas;");
+		
+			mySqlConnection.Open ();
+
+			Console.WriteLine ("Hola Mysql!");
+
+/*			MySqlCommand mySqlCommand = mySqlConnection.CreateCommand ();
+			mySqlCommand.CommandText = 
+				string.Format ("insert into categoria (nombre) values ('{0}')",
+			               DateTime.Now);
+
+			mySqlCommand.ExecuteNonQuery ();
+*/
+			MySqlCommand mySqlCommand = mySqlConnection.CreateCommand();
+
+			mySqlCommand.CommandText = "select * from categoria";
+
+			MySqlDataReader mySqlDataReader = mySqlCommand.ExecuteReader (); // ejecuta la consulta; y con ExecuteNonQuery para 'inserts'
+
+			Console.WriteLine ("FieldCount ={0}", mySqlDataReader.FieldCount); //cuenta las columnas de la tabla ; mySqlDataReader por una parte nos da información de los nombres y tipos de las columnas
+
+			for (int i =0; i < mySqlDataReader.FieldCount; i++)
+			
+			Console.WriteLine ("column {0}={1}",i, mySqlDataReader.GetName (i)); // con GetName obtenemos el nombre de la columna, y con GetType, el tipo de esa columna
+
+			Console.WriteLine ("==================================");
+
+		
+
+			while (mySqlDataReader.Read()) { 
+
+				Console.WriteLine ("una fila"); // entra una vez por cada fila, o sea que según nuestra bd que tiene 4 fila, nos sacará "una fila" 4 veces
+			
+			}
+
+			mySqlDataReader.Close (); //solo deja tener un DataReader por ejecución, hasta que no se cierre uno, no puedes abrir otro
+
+			Console.WriteLine ("==================================");
+
+			MySqlDataReader mySqlDataReader1º = mySqlCommand.ExecuteReader (); 
+
+			while (mySqlDataReader1.Read()) { 
+
+				//mySqlDataReader.GetValue(0); // devuelve el valor de la columna que le indico
+
+				object id = mySqlDataReader1 ["id"]; 
+				object nombre = mySqlDataReader1 ["nombre"];
+				Console.WriteLine ("id={0, -10} nombre={1, -20}", id, nombre);
+			}
+		
+			mySqlDataReader.Close (); 
+
+			mySqlConnection.Close ();
+		}
+	}
+}

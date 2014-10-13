@@ -1,0 +1,25 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="PCategoria/App.cs">
+    <Files>
+      <File FileName="PCategoria/Program.cs" Line="17" Column="2" />
+      <File FileName="PCategoria/MainWindow.cs" Line="192" Column="22" />
+      <File FileName="PCategoria/CategoriaView.cs" Line="35" Column="51" />
+      <File FileName="PCategoria/App.cs" Line="20" Column="2" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State expanded="True">
+          <Option id="ShowAllFiles" value="True" />
+          <Node name="PCategoria" expanded="True">
+            <Node name="App.cs" selected="True" />
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>

@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PHolaGtk", "PHolaGtk\PHolaGtk.csproj", "{9C31B4F8-E224-4A88-A3AB-CCE6AC9F9878}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9C31B4F8-E224-4A88-A3AB-CCE6AC9F9878}.Debug|x86.ActiveCfg = Debug|x86
+		{9C31B4F8-E224-4A88-A3AB-CCE6AC9F9878}.Debug|x86.Build.0 = Debug|x86
+		{9C31B4F8-E224-4A88-A3AB-CCE6AC9F9878}.Release|x86.ActiveCfg = Release|x86
+		{9C31B4F8-E224-4A88-A3AB-CCE6AC9F9878}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = PHolaGtk\PHolaGtk.csproj
+	EndGlobalSection
+EndGlobal
