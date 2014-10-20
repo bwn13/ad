@@ -1,19 +1,21 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="PCategoria/App.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="PCategoria/MainWindow.cs">
     <Files>
-      <File FileName="PCategoria/Program.cs" Line="17" Column="2" />
-      <File FileName="PCategoria/MainWindow.cs" Line="192" Column="22" />
-      <File FileName="PCategoria/CategoriaView.cs" Line="35" Column="51" />
-      <File FileName="PCategoria/App.cs" Line="20" Column="2" />
+      <File FileName="PCategoria/MainWindow.cs" Line="5" Column="15" />
+      <File FileName="PSerpisAd/App.cs" Line="1" Column="1" />
+      <File FileName="PSerpisAd/DbCommandExtensions.cs" Line="1" Column="1" />
+      <File FileName="PCategoria/CategoriaView.cs" Line="1" Column="1" />
+      <File FileName="PCategoria/Program.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
           <Option id="ShowAllFiles" value="True" />
           <Node name="PCategoria" expanded="True">
-            <Node name="App.cs" selected="True" />
+            <Node name="MainWindow.cs" selected="True" />
           </Node>
+          <Node name="PSerpisAd" expanded="True" />
         </State>
       </Pad>
     </Pads>

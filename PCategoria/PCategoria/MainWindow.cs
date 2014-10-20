@@ -2,6 +2,7 @@ using System;
 using System.Data;
 using Gtk;
 using PCategoria;
+using SerpisAd;
 
 public partial class MainWindow: Gtk.Window
 {	
@@ -19,7 +20,7 @@ public partial class MainWindow: Gtk.Window
 		editAction.Sensitive = false;
 
 		dbConnection = App.Instance.DbConnection;
-		dbConnection.Open ();
+		//dbConnection.Open ();
 
 		/*mySqlConnection= new MySqlConnection
 			(
@@ -30,7 +31,7 @@ public partial class MainWindow: Gtk.Window
 				);
 
 		mySqlConnection.Open ();
-	*/
+	   */
 		/*añadimos dos columnas al treeView utilizando el método AppendColumn*/
 
 		treeView.AppendColumn ("id", new CellRendererText (), "text", 0); //siendo 0 el index de la columna
@@ -188,8 +189,7 @@ public partial class MainWindow: Gtk.Window
 		TreeIter treeiter; //Con Treeiter sabemos la posición exacta en el ListStore,la fila, que es como se visualiza el TreeView
 		treeView.Selection.GetSelected (out treeiter);
 		object id =listStore.GetValue (treeiter, 0);
-		CategoriaView categoriaView = new CategoriaView (); // no hace falta llamar a Show (categoriaView.Show) porque en las propiedades de CategoriaView, 'Visible' está activado
-		categoriaView (id);
+		CategoriaView categoriaView = new CategoriaView (id); // no hace falta llamar a Show (categoriaView.Show) porque en las propiedades de CategoriaView, 'Visible' está activado
 	
 	}
 

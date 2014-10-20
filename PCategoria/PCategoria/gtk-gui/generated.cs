@@ -16,8 +16,6 @@ namespace Stetic
 
 	internal class ActionGroups
 	{
-		private static global::Gtk.ActionGroup group1;
-
 		public static Gtk.ActionGroup GetActionGroup (System.Type type)
 		{
 			return Stetic.ActionGroups.GetActionGroup (type.FullName);
@@ -25,14 +23,7 @@ namespace Stetic
 
 		public static Gtk.ActionGroup GetActionGroup (string name)
 		{
-			if ((name == "PCategoria.App")) {
-				if ((global::Stetic.ActionGroups.group1 == null)) {
-					global::Stetic.ActionGroups.group1 = new PCategoria.App ();
-				}
-				return global::Stetic.ActionGroups.group1;
-			} else {
-				return null;
-			}
+			return null;
 		}
 	}
 }

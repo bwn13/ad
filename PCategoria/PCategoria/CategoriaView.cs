@@ -1,5 +1,6 @@
 using System;
 using System.Data;
+using SerpisAd;
 
 namespace PCategoria
 {
@@ -35,13 +36,17 @@ namespace PCategoria
 				App.Instance.DbConnection.CreateCommand ();
 			dbCommand.CommandText = String.Format (
 				"update categoria set nombre=@nombre where id={0}", id);
-		
-			IDbDataParameter dbDataParameter = dbCommand.CreateParameter ();
+
+
+			/*IDbDataParameter dbDataParameter = dbCommand.CreateParameter ();
 			dbDataParameter.ParameterName = "nombre";
 			dbDataParameter.Value = entryName.Text ;
 			dbCommand.Parameters.Add(dbDataParameter);
+			*/
 
-			dbCommand.ExecuteNonQuery();
+			//DbCommandExtensions.AddParameter (dbCommand, "nombre", entryName.Text);
+			dbCommand.AddParameter ("nombre", entryName.Text);
+			dbCommand.ExecuteNonQuery ();
 
 			Destroy ();
 

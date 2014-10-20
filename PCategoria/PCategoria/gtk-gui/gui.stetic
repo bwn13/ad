@@ -8,7 +8,6 @@
     <widget-library name="glade-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
     <widget-library name="../bin/Debug/PCategoria.exe" internal="true" />
   </import>
-  <action-group name="PCategoria.App" />
   <widget class="Gtk.Window" id="MainWindow" design-size="464 365">
     <action-group name="Default">
       <action id="refreshAction">
@@ -105,7 +104,7 @@
           <widget class="Gtk.Toolbar" id="toolbar1">
             <property name="MemberName" />
             <property name="ShowArrow">False</property>
-            <node name="__gtksharp_84_Stetic_Editor_ActionToolbar" type="Toolbar">
+            <node name="toolbar1" type="Toolbar">
               <node type="Toolitem" action="saveAction" />
             </node>
           </widget>
@@ -160,14 +159,6 @@
           <placeholder />
         </child>
       </widget>
-    </child>
-  </widget>
-  <widget class="Gtk.Window" id="PCategoria.App" design-size="400 300">
-    <property name="MemberName" />
-    <property name="Title" translatable="yes">App</property>
-    <property name="WindowPosition">CenterOnParent</property>
-    <child>
-      <placeholder />
     </child>
   </widget>
 </stetic-interface>
