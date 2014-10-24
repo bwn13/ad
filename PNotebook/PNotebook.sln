@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PNotebook", "PNotebook\PNotebook.csproj", "{646BFD47-EBE6-485E-A488-CD2EEFB7D444}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{646BFD47-EBE6-485E-A488-CD2EEFB7D444}.Debug|x86.ActiveCfg = Debug|x86
+		{646BFD47-EBE6-485E-A488-CD2EEFB7D444}.Debug|x86.Build.0 = Debug|x86
+		{646BFD47-EBE6-485E-A488-CD2EEFB7D444}.Release|x86.ActiveCfg = Release|x86
+		{646BFD47-EBE6-485E-A488-CD2EEFB7D444}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = PNotebook\PNotebook.csproj
+	EndGlobalSection
+EndGlobal
