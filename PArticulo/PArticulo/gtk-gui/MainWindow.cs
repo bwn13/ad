@@ -4,12 +4,16 @@ public partial class MainWindow
 {
 	private global::Gtk.UIManager UIManager;
 	private global::Gtk.Action ArchivoAction;
-	private global::Gtk.Action ArticuloAction;
-	private global::Gtk.Action CategoriaAction;
+	private global::Gtk.Action ArtculoAction;
+	private global::Gtk.Action CategoraAction;
 	private global::Gtk.Action refreshAction;
 	private global::Gtk.Action addAction;
 	private global::Gtk.Action deleteAction;
 	private global::Gtk.Action editAction;
+	private global::Gtk.Action refreshAction1;
+	private global::Gtk.Action addAction1;
+	private global::Gtk.Action deleteAction1;
+	private global::Gtk.Action editAction1;
 	private global::Gtk.VBox vbox1;
 	private global::Gtk.MenuBar menubar1;
 	private global::Gtk.Toolbar toolbar1;
@@ -19,6 +23,10 @@ public partial class MainWindow
 	private global::Gtk.ScrolledWindow scrolledwindow1;
 	private global::Gtk.TreeView treeview1;
 	private global::Gtk.Label label1;
+	private global::Gtk.VBox vbox3;
+	private global::Gtk.Toolbar toolbar3;
+	private global::Gtk.ScrolledWindow scrolledwindow2;
+	private global::Gtk.TreeView treeview2;
 	private global::Gtk.Label label2;
 
 	protected virtual void Build ()
@@ -30,12 +38,12 @@ public partial class MainWindow
 		this.ArchivoAction = new global::Gtk.Action ("ArchivoAction", global::Mono.Unix.Catalog.GetString ("Archivo"), null, null);
 		this.ArchivoAction.ShortLabel = global::Mono.Unix.Catalog.GetString ("Archivo");
 		w1.Add (this.ArchivoAction, null);
-		this.ArticuloAction = new global::Gtk.Action ("ArticuloAction", global::Mono.Unix.Catalog.GetString ("Articulo"), null, null);
-		this.ArticuloAction.ShortLabel = global::Mono.Unix.Catalog.GetString ("Articulo");
-		w1.Add (this.ArticuloAction, null);
-		this.CategoriaAction = new global::Gtk.Action ("CategoriaAction", global::Mono.Unix.Catalog.GetString ("Categoria"), null, null);
-		this.CategoriaAction.ShortLabel = global::Mono.Unix.Catalog.GetString ("Categoria");
-		w1.Add (this.CategoriaAction, null);
+		this.ArtculoAction = new global::Gtk.Action ("ArtculoAction", global::Mono.Unix.Catalog.GetString ("Artículo"), null, null);
+		this.ArtculoAction.ShortLabel = global::Mono.Unix.Catalog.GetString ("Articulo");
+		w1.Add (this.ArtculoAction, null);
+		this.CategoraAction = new global::Gtk.Action ("CategoraAction", global::Mono.Unix.Catalog.GetString ("Categoría"), null, null);
+		this.CategoraAction.ShortLabel = global::Mono.Unix.Catalog.GetString ("Categoria");
+		w1.Add (this.CategoraAction, null);
 		this.refreshAction = new global::Gtk.Action ("refreshAction", null, null, "gtk-refresh");
 		w1.Add (this.refreshAction, null);
 		this.addAction = new global::Gtk.Action ("addAction", null, null, "gtk-add");
@@ -44,6 +52,14 @@ public partial class MainWindow
 		w1.Add (this.deleteAction, null);
 		this.editAction = new global::Gtk.Action ("editAction", null, null, "gtk-edit");
 		w1.Add (this.editAction, null);
+		this.refreshAction1 = new global::Gtk.Action ("refreshAction1", null, null, "gtk-refresh");
+		w1.Add (this.refreshAction1, null);
+		this.addAction1 = new global::Gtk.Action ("addAction1", null, null, "gtk-add");
+		w1.Add (this.addAction1, null);
+		this.deleteAction1 = new global::Gtk.Action ("deleteAction1", null, null, "gtk-delete");
+		w1.Add (this.deleteAction1, null);
+		this.editAction1 = new global::Gtk.Action ("editAction1", null, null, "gtk-edit");
+		w1.Add (this.editAction1, null);
 		this.UIManager.InsertActionGroup (w1, 0);
 		this.AddAccelGroup (this.UIManager.AccelGroup);
 		this.Name = "MainWindow";
@@ -54,7 +70,7 @@ public partial class MainWindow
 		this.vbox1.Name = "vbox1";
 		this.vbox1.Spacing = 6;
 		// Container child vbox1.Gtk.Box+BoxChild
-		this.UIManager.AddUiFromString ("<ui><menubar name='menubar1'><menu name='ArchivoAction' action='ArchivoAction'><menuitem name='ArticuloAction' action='ArticuloAction'/><menuitem name='CategoriaAction' action='CategoriaAction'/></menu></menubar></ui>");
+		this.UIManager.AddUiFromString ("<ui><menubar name='menubar1'><menu name='ArchivoAction' action='ArchivoAction'><menuitem name='ArtculoAction' action='ArtculoAction'/><menuitem name='CategoraAction' action='CategoraAction'/></menu></menubar></ui>");
 		this.menubar1 = ((global::Gtk.MenuBar)(this.UIManager.GetWidget ("/menubar1")));
 		this.menubar1.Name = "menubar1";
 		this.vbox1.Add (this.menubar1);
@@ -76,7 +92,7 @@ public partial class MainWindow
 		this.notebook1 = new global::Gtk.Notebook ();
 		this.notebook1.CanFocus = true;
 		this.notebook1.Name = "notebook1";
-		this.notebook1.CurrentPage = 0;
+		this.notebook1.CurrentPage = 1;
 		// Container child notebook1.Gtk.Notebook+NotebookChild
 		this.vbox2 = new global::Gtk.VBox ();
 		this.vbox2.Name = "vbox2";
@@ -108,21 +124,48 @@ public partial class MainWindow
 		// Notebook tab
 		this.label1 = new global::Gtk.Label ();
 		this.label1.Name = "label1";
-		this.label1.LabelProp = global::Mono.Unix.Catalog.GetString ("page1");
+		this.label1.LabelProp = global::Mono.Unix.Catalog.GetString ("Categoría");
 		this.notebook1.SetTabLabel (this.vbox2, this.label1);
 		this.label1.ShowAll ();
+		// Container child notebook1.Gtk.Notebook+NotebookChild
+		this.vbox3 = new global::Gtk.VBox ();
+		this.vbox3.Name = "vbox3";
+		this.vbox3.Spacing = 6;
+		// Container child vbox3.Gtk.Box+BoxChild
+		this.UIManager.AddUiFromString ("<ui><toolbar name='toolbar3'><toolitem name='refreshAction1' action='refreshAction1'/><toolitem name='addAction1' action='addAction1'/><toolitem name='deleteAction1' action='deleteAction1'/><toolitem name='editAction1' action='editAction1'/></toolbar></ui>");
+		this.toolbar3 = ((global::Gtk.Toolbar)(this.UIManager.GetWidget ("/toolbar3")));
+		this.toolbar3.Name = "toolbar3";
+		this.toolbar3.ShowArrow = false;
+		this.vbox3.Add (this.toolbar3);
+		global::Gtk.Box.BoxChild w8 = ((global::Gtk.Box.BoxChild)(this.vbox3 [this.toolbar3]));
+		w8.Position = 0;
+		w8.Expand = false;
+		w8.Fill = false;
+		// Container child vbox3.Gtk.Box+BoxChild
+		this.scrolledwindow2 = new global::Gtk.ScrolledWindow ();
+		this.scrolledwindow2.CanFocus = true;
+		this.scrolledwindow2.Name = "scrolledwindow2";
+		this.scrolledwindow2.ShadowType = ((global::Gtk.ShadowType)(1));
+		// Container child scrolledwindow2.Gtk.Container+ContainerChild
+		this.treeview2 = new global::Gtk.TreeView ();
+		this.treeview2.CanFocus = true;
+		this.treeview2.Name = "treeview2";
+		this.scrolledwindow2.Add (this.treeview2);
+		this.vbox3.Add (this.scrolledwindow2);
+		global::Gtk.Box.BoxChild w10 = ((global::Gtk.Box.BoxChild)(this.vbox3 [this.scrolledwindow2]));
+		w10.Position = 1;
+		this.notebook1.Add (this.vbox3);
+		global::Gtk.Notebook.NotebookChild w11 = ((global::Gtk.Notebook.NotebookChild)(this.notebook1 [this.vbox3]));
+		w11.Position = 1;
 		// Notebook tab
-		global::Gtk.Label w8 = new global::Gtk.Label ();
-		w8.Visible = true;
-		this.notebook1.Add (w8);
 		this.label2 = new global::Gtk.Label ();
 		this.label2.Name = "label2";
-		this.label2.LabelProp = global::Mono.Unix.Catalog.GetString ("page2");
-		this.notebook1.SetTabLabel (w8, this.label2);
+		this.label2.LabelProp = global::Mono.Unix.Catalog.GetString ("Artículo");
+		this.notebook1.SetTabLabel (this.vbox3, this.label2);
 		this.label2.ShowAll ();
 		this.vbox1.Add (this.notebook1);
-		global::Gtk.Box.BoxChild w9 = ((global::Gtk.Box.BoxChild)(this.vbox1 [this.notebook1]));
-		w9.Position = 2;
+		global::Gtk.Box.BoxChild w12 = ((global::Gtk.Box.BoxChild)(this.vbox1 [this.notebook1]));
+		w12.Position = 2;
 		this.Add (this.vbox1);
 		if ((this.Child != null)) {
 			this.Child.ShowAll ();
@@ -132,5 +175,10 @@ public partial class MainWindow
 		this.Show ();
 		this.DeleteEvent += new global::Gtk.DeleteEventHandler (this.OnDeleteEvent);
 		this.refreshAction.Activated += new global::System.EventHandler (this.OnRefreshActionActivated);
+		this.addAction.Activated += new global::System.EventHandler (this.OnAddActionActivated);
+		this.deleteAction.Activated += new global::System.EventHandler (this.OnDeleteActionActivated);
+		this.editAction.Activated += new global::System.EventHandler (this.OnEditActionActivated);
+		this.refreshAction1.Activated += new global::System.EventHandler (this.OnRefreshAction1Activated);
+		this.addAction1.Activated += new global::System.EventHandler (this.OnAddAction1Activated);
 	}
 }

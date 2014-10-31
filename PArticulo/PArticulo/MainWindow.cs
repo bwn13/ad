@@ -2,11 +2,13 @@ using System;
 using Gtk;
 using System.Data;
 using SerpisAd;
+using PArticulo;
 
 public partial class MainWindow: Gtk.Window
 {	
 	/*variables globales*/
 	private ListStore listStore;
+	private ListStore listStore2;
 	private IDbConnection dbConnection;
 	private IDbCommand dbCommand;
 	private IDataReader dataReader;
@@ -17,40 +19,58 @@ public partial class MainWindow: Gtk.Window
 
 		Build ();
 
-		//treeview1.AppendColumn("precio", new CellRenderer (), "text", out);
-		//ListStore liststore = new ListStore (typeof(string));
-		//object value = new decimal (1.2).ToString();
-		//listStore.AppendValues(value);
+		dbConnection = App.Instance.DbConnection;	
 
-
+		//Categoria
+		//Por defecto aparecen estos iconos no operativos(hasta que se seleccione una fila)
 		deleteAction.Sensitive = false;
 		editAction.Sensitive = false;
+		//Articulo
+		deleteAction1.Sensitive = false;
+		editAction1.Sensitive = false;
 
-		dbConnection = App.Instance.DbConnection;	
+
 		treeview1.AppendColumn ("id", new CellRendererText (), "text", 0); //siendo 0 el index de la columna
 		treeview1.AppendColumn ("nombre", new CellRendererText (), "text", 1);
 
-		listStore = new ListStore (typeof(ulong), typeof(string)); 
+		treeview2.AppendColumn ("id",  new CellRendererText (), "text", 0);
+		treeview2.AppendColumn ("nombre", new CellRendererText (), "text", 1);
+		treeview2.AppendColumn ("categoria", new CellRendererText (), "text", 2);
+		treeview2.AppendColumn ("precio",  new CellRendererText (), "text", 3);
+
+
+		listStore = new ListStore (typeof(ulong), typeof(string));
+		listStore2 = new ListStore (typeof(ulong), typeof(string),typeof(ulong),typeof(decimal));
 
 		treeview1.Model = listStore; 
 		fillListStore ();
 
+		treeview2.Model = listStore2; 
+		fillListStore2 ();
 
 		treeview1.Selection.Changed += delegate {
 
-			//bool hasSelected = treeview1.Selection.CountSelectedRows () > 0;
-
-			deleteAction.Sensitive = treeview1.Selection.CountSelectedRows () > 0; // cuando es mayor que 0, es true
-			editAction.Sensitive = treeview1.Selection.CountSelectedRows () > 0;
+		//bool hasSelected = treeview1.Selection.CountSelectedRows () > 0;
+		deleteAction.Sensitive = treeview1.Selection.CountSelectedRows () > 0; // cuando es mayor que 0, es true
+		editAction.Sensitive = treeview1.Selection.CountSelectedRows () > 0;
 		};
-	} //Main
+
+		treeview2.Selection.Changed += delegate {
+
+			//bool hasSelected = treeview2.Selection.CountSelectedRows () > 0;
+			deleteAction1.Sensitive = treeview2.Selection.CountSelectedRows () > 0; // cuando es mayor que 0, es true
+			editAction1.Sensitive = treeview2.Selection.CountSelectedRows () > 0;
+		};
 	
+	
+	} //Main
+
+
+
 	private void fillListStore () {
 		IDbCommand dbCommand = dbConnection.CreateCommand ();
 		dbCommand.CommandText = "select * from categoria";
-
-
-
+	
 		dataReader = dbCommand.ExecuteReader (); 
 
 		while (dataReader.Read()) { 
@@ -65,6 +85,28 @@ public partial class MainWindow: Gtk.Window
 
 	}
 
+	private void fillListStore2 () {
+		IDbCommand dbCommand = dbConnection.CreateCommand ();
+		dbCommand.CommandText = "select * from articulo";
+
+		dataReader = dbCommand.ExecuteReader (); 
+
+		while (dataReader.Read()) { 
+
+			object id = dataReader ["id"]; 
+			object nombre =dataReader["nombre"];
+			object categoria =dataReader["categoria"];
+			object precio =dataReader["precio"];
+
+			listStore2.AppendValues (id, nombre, categoria, precio);
+
+		}
+		dataReader.Close ();
+
+	}
+
+	
+
 	protected void OnDeleteEvent (object sender, DeleteEventArgs a)
 	{
 
@@ -75,7 +117,6 @@ public partial class MainWindow: Gtk.Window
 
 	protected void OnAddActionActivated (object sender, EventArgs e)
 	{
-
 
 		string insertSql = "insert into categoria (nombre) values ('{0}')";
 		insertSql = string.Format (insertSql, "Nuevo " + DateTime.Now);
@@ -91,7 +132,6 @@ public partial class MainWindow: Gtk.Window
 	{
 		listStore.Clear ();
 		fillListStore ();
-
 	}
 
 	protected void OnDeleteActionActivated (object sender, EventArgs e)
@@ -112,7 +152,6 @@ public partial class MainWindow: Gtk.Window
 			);
 
 	
-
 		messageDialog.Title = Title; 
 		if ((ResponseType)messageDialog.Run () == ResponseType.Ok) {
 
@@ -122,22 +161,40 @@ public partial class MainWindow: Gtk.Window
 
 			dbCommand.ExecuteNonQuery ();
 		}
-
 		messageDialog.Destroy ();
 
 	}
-	
 
 	protected void OnEditActionActivated (object sender, EventArgs e)
 	{
 
+		TreeIter treeiter; //Con Treeiter sabemos la posición exacta en el ListStore,la fila, que es como se visualiza el TreeView
+		treeview1.Selection.GetSelected (out treeiter);
+		object id =listStore.GetValue (treeiter, 0);
+		EditViewCategoria editviewcategoria = new EditViewCategoria (id);
 
 
 	}
 
-	/*protected void OnDeleteEvent (object sender, DeleteEventArgs a)
+	
+
+	/////////////// ARTICULO /////////////////
+	
+	protected void OnRefreshAction1Activated (object sender, EventArgs e)
 	{
-		Application.Quit ();
-		a.RetVal = true;
-	}*/
-}
+		listStore2.Clear ();
+		fillListStore2 ();
+	}
+
+	protected void OnAddAction1Activated (object sender, EventArgs e)
+	{
+		string insertSql = "insert into articulo (nombre,categoria,precio) values ('{0}','{1}','{2}')";
+		insertSql = string.Format (insertSql, "Nuevo " + DateTime.Now);
+		dbCommand = dbConnection.CreateCommand ();
+		dbCommand.CommandText = insertSql;
+
+		dbCommand.ExecuteNonQuery ();
+	}
+
+
+} // Class
