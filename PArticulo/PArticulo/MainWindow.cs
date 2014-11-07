@@ -19,6 +19,8 @@ public partial class MainWindow: Gtk.Window
 
 		Build ();
 
+
+
 		dbConnection = App.Instance.DbConnection;	
 
 		//Categoria
@@ -40,7 +42,7 @@ public partial class MainWindow: Gtk.Window
 
 
 		listStore = new ListStore (typeof(ulong), typeof(string));
-		listStore2 = new ListStore (typeof(ulong), typeof(string),typeof(ulong),typeof(decimal));
+		listStore2 = new ListStore (typeof(ulong), typeof(string),typeof(string),typeof(string));
 
 		treeview1.Model = listStore; 
 		fillListStore ();
@@ -95,8 +97,8 @@ public partial class MainWindow: Gtk.Window
 
 			object id = dataReader ["id"]; 
 			object nombre =dataReader["nombre"];
-			object categoria =dataReader["categoria"];
-			object precio =dataReader["precio"];
+			object categoria =dataReader["categoria"].ToString();
+			object precio =dataReader["precio"].ToString();
 
 			listStore2.AppendValues (id, nombre, categoria, precio);
 
@@ -104,9 +106,7 @@ public partial class MainWindow: Gtk.Window
 		dataReader.Close ();
 
 	}
-
 	
-
 	protected void OnDeleteEvent (object sender, DeleteEventArgs a)
 	{
 
@@ -136,7 +136,6 @@ public partial class MainWindow: Gtk.Window
 
 	protected void OnDeleteActionActivated (object sender, EventArgs e)
 	{
-
 
 		TreeIter treeiter; //Con Treeiter sabemos la posición exacta en el ListStore,la fila, que es como se visualiza el TreeView
 		treeview1.Selection.GetSelected (out treeiter);
@@ -176,24 +175,52 @@ public partial class MainWindow: Gtk.Window
 
 	}
 
-	
-
 	/////////////// ARTICULO /////////////////
-	
+
+	protected void OnAddAction1Activated (object sender, EventArgs e)
+	{
+		string insertSql1 = "insert into articulo (nombre) values ('{0}')";
+		//string insertSql1 = "insert into articulo (nombre,categoria,precio) values ('{0}','{1}','{2}')";
+		insertSql1 = string.Format (insertSql1, "Nuevonombre "+ DateTime.Now);
+
+		dbCommand = dbConnection.CreateCommand ();
+		dbCommand.CommandText = insertSql1;
+
+		dbCommand.ExecuteNonQuery ();
+	}
+
 	protected void OnRefreshAction1Activated (object sender, EventArgs e)
 	{
 		listStore2.Clear ();
 		fillListStore2 ();
 	}
 
-	protected void OnAddAction1Activated (object sender, EventArgs e)
+	protected void OnDeleteAction1Activated (object sender, EventArgs e)
 	{
-		string insertSql = "insert into articulo (nombre,categoria,precio) values ('{0}','{1}','{2}')";
-		insertSql = string.Format (insertSql, "Nuevo " + DateTime.Now);
-		dbCommand = dbConnection.CreateCommand ();
-		dbCommand.CommandText = insertSql;
+		TreeIter treeiter2; //Con Treeiter sabemos la posición exacta en el ListStore,la fila, que es como se visualiza el TreeView
+		treeview2.Selection.GetSelected (out treeiter2);
+		object id =listStore2.GetValue (treeiter2, 0);
 
-		dbCommand.ExecuteNonQuery ();
+
+		MessageDialog messageDialog = new MessageDialog (
+			this,
+			DialogFlags.Modal,
+			MessageType.Question,
+			ButtonsType.OkCancel,
+			"¿Desea eliminar el registro de la Base de Datos?"
+			);
+
+
+		messageDialog.Title = Title; 
+		if ((ResponseType)messageDialog.Run () == ResponseType.Ok) {
+
+			string deleteSql= string.Format("DELETE FROM articulo WHERE id={0}", id);
+			dbCommand = dbConnection.CreateCommand ();
+			dbCommand.CommandText =deleteSql;
+
+			dbCommand.ExecuteNonQuery ();
+		}
+		messageDialog.Destroy ();
 	}
 
 
